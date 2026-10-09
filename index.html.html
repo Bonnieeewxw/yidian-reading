@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f1e7">
+<title>一点读书｜轻量阅读手账</title>
+<style>
+:root{--paper:#fbf7ef;--ink:#332f2a;--muted:#81786d;--line:#e6dccb;--green:#718b73;--pink:#dba9ad;--yellow:#e8cc86;--blue:#a8bfd8;--purple:#c4b0d7;--card:#fffdf8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.55}
+header{padding:28px 18px 22px;background:linear-gradient(135deg,#f2e5d1,#f8f2e8);border-bottom:1px solid var(--line)}
+.wrap{max-width:900px;margin:auto;padding:0 16px}h1{font-size:clamp(25px,5vw,36px);margin:0 0 5px;letter-spacing:.04em}header p{margin:0;color:#766b5f}.eyebrow{font-size:12px;letter-spacing:.18em;color:#8b765d;margin-bottom:8px}
+main{padding:20px 0 50px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 4px 18px #6c4c1a08}
+h2{font-size:18px;margin:0 0 14px}label{display:block;font-size:13px;font-weight:650;margin:12px 0 5px}input,select,textarea{font:inherit;color:var(--ink);width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fffefa;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #718b731c}textarea{resize:vertical;min-height:70px}.hint{font-size:12px;color:var(--muted);margin-top:4px}.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}.btn{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:650;cursor:pointer;background:var(--green);color:white}.btn.secondary{background:#eee7dc;color:#4f473d}.btn.small{padding:7px 10px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.stars{display:flex;gap:5px;margin-top:7px}.star{font-size:25px;cursor:pointer;color:#d8d0c3;background:none;border:0;padding:0}.star.active{color:#c59439}.toolbar{display:flex;gap:8px;margin-bottom:12px}.toolbar input{flex:1}.toolbar select{width:145px}.stats{display:flex;gap:8px;margin-bottom:12px}.stat{background:#f4eee4;border-radius:12px;padding:10px 12px;flex:1}.stat strong{font-size:20px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.entry{border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;background:#fffefa}.entrytop{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.entry h3{font-size:16px;margin:0}.meta{font-size:12px;color:var(--muted);margin:4px 0 9px}.tag{font-size:11px;border-radius:20px;padding:3px 8px;background:#e5eee5;color:#4b6b50;white-space:nowrap}.entry p{margin:7px 0;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}.entry b{color:#73654e}.entryfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}.empty{text-align:center;padding:32px 12px;color:var(--muted)}.empty .emoji{font-size:30px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}.notice{font-size:12px;color:#6f665a;background:#f5efe5;border-radius:10px;padding:10px;margin-top:12px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.panel{padding:15px}.toolbar{flex-direction:column}.toolbar select{width:100%}.wrap{padding:0 12px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">A SMALL READING JOURNAL</div><h1>一点读书 <span style="font-size:.65em">📚</span></h1><p>不必记住整本书，只给它留下一个可以找回的入口。</p></div></header>
+<main class="wrap">
+<div class="layout">
+<section class="panel">
+<h2>✍️ 记下这一点收获</h2>
+<form id="bookForm">
+<label for="title">书名 *</label><input id="title" required maxlength="120" placeholder="例如：东方快车谋杀案">
+<div class="row"><div><label for="author">作者</label><input id="author" maxlength="80" placeholder="作者姓名"></div><div><label for="type">书籍类型</label><select id="type"><option>小说 / 推理</option><option>历史 / 传记</option><option>人文 / 哲学</option><option>心理 / 社科</option><option>其他</option></select></div></div>
+<div class="row"><div><label for="date">阅读日期</label><input id="date" type="date"></div><div><label for="pages">索引页码</label><input id="pages" maxlength="80" placeholder="例如：p.86、p.126"></div></div>
+<label for="summary">这本书讲了什么？</label><textarea id="summary" maxlength="700" placeholder="用自己的话写 1～3 句话就好。"></textarea>
+<label for="takeaway">我最想记住什么？</label><textarea id="takeaway" maxlength="500" placeholder="一个人物、一处反转、一条观点，或一句让我有收获的话。"></textarea>
+<label for="note">索引 / 关键词（选填）</label><input id="note" maxlength="180" placeholder="例如：人物动机、p.86、让我想到……">
+<label>喜欢程度</label><div class="stars" id="starPicker" aria-label="喜欢程度"></div>
+<div class="actions"><button class="btn" type="submit">保存阅读卡</button><button class="btn secondary" type="button" id="clearForm">清空表单</button></div>
+<div class="notice">🔒 你的记录保存在当前浏览器的本地存储中。建议偶尔导出备份；清除浏览器数据可能会删除记录。</div>
+</form>
+</section>
+<section class="panel" style="margin-top:16px">
+<h2>💭 给某一页添加随想</h2>
+<p class="hint">同一本书可以添加很多条：记下页码、原句，以及它带给你的领悟。不必每次都写全书总结。</p>
+<label for="reflectionBook">选择书籍 *</label><select id="reflectionBook"><option value="">请先保存一本书</option></select>
+<label for="reflectionPage">页码 / 位置</label><input id="reflectionPage" maxlength="80" placeholder="例如：p.86，第三章">
+<label for="reflectionQuote">原句或关键词（选填）</label><textarea id="reflectionQuote" maxlength="1000" placeholder="可以摘录短句，也可以只写几个关键词。" rows="2"></textarea>
+<label for="reflectionThought">我的随想 / 领悟 *</label><textarea id="reflectionThought" maxlength="1200" placeholder="这句话让我想到什么？为什么对我有意义？" rows="3"></textarea>
+<div class="actions"><button class="btn" type="button" id="saveReflection">保存这条随想</button><button class="btn secondary" type="button" id="clearReflection">清空</button></div>
+</section>
+<section>
+<div class="stats"><div class="stat"><strong id="count">0</strong><span>本已记录</span></div><div class="stat"><strong id="avg">—</strong><span>平均喜欢程度</span></div></div>
+<div class="panel">
+<h2>🗂️ 我的阅读卡</h2>
+<div class="toolbar"><input id="search" placeholder="搜索书名、作者、收获或页码…"><select id="filter"><option value="">所有类型</option><option>小说 / 推理</option><option>历史 / 传记</option><option>人文 / 哲学</option><option>心理 / 社科</option><option>其他</option></select></div>
+<div class="actions" style="margin-top:0;margin-bottom:13px"><button class="btn secondary small" id="exportJson">导出备份 JSON</button><button class="btn secondary small" id="exportCsv">导出表格 CSV</button><button class="btn secondary small" id="importBtn">导入备份</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
+<div id="entries"></div>
+<h2 style="margin-top:20px">📝 我的页边随想</h2><div id="reflectionEntries"></div>
+</div>
+<div class="footer">轻量记录 · 随时回顾 · 不打断阅读</div>
+</section>
+</div>
+</main>
+<script>
+const KEY='yidian-reading-journal-v1';
+let books=[];let reflections=[];let rating=4;let editingId=null;
+try{reflections=JSON.parse(localStorage.getItem('yidian-reading-reflections-v1')||'[]');if(!Array.isArray(reflections))reflections=[]}catch(e){reflections=[]}
+try{books=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(books))books=[]}catch(e){books=[]}
+const $=id=>document.getElementById(id);
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(books));}catch(e){alert('浏览器存储不可用，请导出备份保存记录。')}render()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function drawStars(){ $('starPicker').innerHTML=[1,2,3,4,5].map(n=>`<button class="star ${n<=rating?'active':''}" type="button" data-star="${n}" aria-label="${n}星">★</button>`).join('');document.querySelectorAll('[data-star]').forEach(b=>b.onclick=()=>{rating=+b.dataset.star;drawStars()})}
+function resetForm(){ $('bookForm').reset();$('date').value=new Date().toISOString().slice(0,10);rating=4;editingId=null;$('bookForm').querySelector('button[type=submit]').textContent='保存阅读卡';drawStars()}
+$('date').value=new Date().toISOString().slice(0,10);drawStars();
+$('bookForm').addEventListener('submit',e=>{e.preventDefault();const item={id:editingId||((crypto.randomUUID&&crypto.randomUUID())||String(Date.now())),title:$('title').value.trim(),author:$('author').value.trim(),type:$('type').value,date:$('date').value,pages:$('pages').value.trim(),summary:$('summary').value.trim(),takeaway:$('takeaway').value.trim(),note:$('note').value.trim(),rating,updatedAt:new Date().toISOString()};if(!item.title)return;if(editingId){books=books.map(b=>b.id===editingId?item:b)}else books.unshift(item);persist();resetForm()});
+$('clearForm').onclick=resetForm;
+$('search').addEventListener('input',render);$('filter').addEventListener('change',render);
+function saveReflections(){try{localStorage.setItem('yidian-reading-reflections-v1',JSON.stringify(reflections))}catch(e){alert('浏览器存储不可用，请导出备份。')}render()}
+function updateReflectionBooks(){const sel=$('reflectionBook');const old=sel.value;sel.innerHTML=books.length?'<option value="">请选择一本书</option>'+books.map(b=>`<option value="${esc(b.id)}">${esc(b.title)}</option>`).join(''):'<option value="">请先保存一本书</option>';if(books.some(b=>b.id===old))sel.value=old}
+$('saveReflection').onclick=()=>{const bookId=$('reflectionBook').value,thought=$('reflectionThought').value.trim();if(!bookId){alert('请先选择一本已记录的书。');return}if(!thought){alert('写下一点自己的随想再保存吧。');return}const b=books.find(x=>x.id===bookId);reflections.unshift({id:(crypto.randomUUID&&crypto.randomUUID())||String(Date.now()),bookId,bookTitle:b?b.title:'',page:$('reflectionPage').value.trim(),quote:$('reflectionQuote').value.trim(),thought,date:new Date().toISOString().slice(0,10)});$('reflectionPage').value='';$('reflectionQuote').value='';$('reflectionThought').value='';saveReflections()};
+$('clearReflection').onclick=()=>{$('reflectionPage').value='';$('reflectionQuote').value='';$('reflectionThought').value=''};
+function render(){updateReflectionBooks();const q=$('search').value.trim().toLowerCase(),f=$('filter').value;'search').value.trim().toLowerCase(),f=$('filter').value;const shown=books.filter(b=>(!f||b.type===f)&&(!q||[b.title,b.author,b.summary,b.takeaway,b.note,b.pages].join(' ').toLowerCase().includes(q)));$('count').textContent=books.length;$('avg').textContent=books.length?(books.reduce((s,b)=>s+(+b.rating||0),0)/books.length).toFixed(1)+'★':'—';if(!shown.length){$('entries').innerHTML=`<div class="empty"><div class="emoji">📖</div><strong>${books.length?'没有找到匹配的阅读卡':'你的第一张阅读卡还在等你'}</strong><p>${books.length?'试试换一个关键词或类型。':'读完一本书，记下主线和一个收获就好。'}</p></div>`;return}
+$('entries').innerHTML=shown.map(b=>`<article class="entry"><div class="entrytop"><div><h3>${esc(b.title)}</h3><div class="meta">${esc(b.author||'作者未填写')} · ${esc(b.date||'日期未填写')}</div></div><span class="tag">${esc(b.type)}</span></div>${b.summary?`<p><b>故事 / 主线：</b>${esc(b.summary)}</p>`:''}${b.takeaway?`<p><b>我想记住：</b>${esc(b.takeaway)}</p>`:''}${(b.pages||b.note)?`<p><b>索引：</b>${esc([b.pages,b.note].filter(Boolean).join(' · '))}</p>`:''}<div class="entryfoot"><span style="color:#c59439">${'★'.repeat(+b.rating||0)}<span style="color:#ddd4c7">${'★'.repeat(5-(+b.rating||0))}</span></span><span><button class="btn secondary small" data-edit="${esc(b.id)}">编辑</button> <button class="btn secondary small" data-delete="${esc(b.id)}">删除</button></span></div></article>`).join('');
+document.querySelectorAll('[data-edit]').forEach(btn=>btn.onclick=()=>editBook(btn.dataset.edit));document.querySelectorAll('[data-delete]').forEach(btn=>btn.onclick=()=>{const b=books.find(x=>x.id===btn.dataset.delete);if(b&&confirm(`确定删除《${b.title}》这张阅读卡吗？`)){books=books.filter(x=>x.id!==b.id);persist()}})}
+const shownRefs=reflections.filter(r=>(!q||[r.bookTitle,r.page,r.quote,r.thought].join(' ').toLowerCase().includes(q))&&(!f||((books.find(b=>b.id===r.bookId)||{}).type===f)));
+$('reflectionEntries').innerHTML=shownRefs.length?shownRefs.map(r=>`<article class="entry"><div class="entrytop"><h3>${esc(r.bookTitle||'未命名书籍')}</h3><span class="tag">${esc(r.page||'随想')}</span></div><div class="meta">${esc(r.date||'')}</div>${r.quote?`<p><b>原句 / 关键词：</b>${esc(r.quote)}</p>`:''}<p><b>我的领悟：</b>${esc(r.thought)}</p><div class="entryfoot"><span class="meta">独立随想卡</span><button class="btn secondary small" data-delref="${esc(r.id)}">删除</button></div></article>`).join():'<div class="empty"><div class="emoji">💭</div><strong>还没有页边随想</strong><p>选择一本书，记下某一页让你停下来思考的内容。</p></div>';
+document.querySelectorAll('[data-delref]').forEach(btn=>btn.onclick=()=>{if(confirm('确定删除这条随想吗？')){reflections=reflections.filter(r=>r.id!==btn.dataset.delref);saveReflections()}})
+function editBook(id){const b=books.find(x=>x.id===id);if(!b)return;editingId=id;for(const k of ['title','author','type','date','pages','summary','takeaway','note'])$(k).value=b[k]||'';rating=+b.rating||4;drawStars();$('bookForm').querySelector('button[type=submit]').textContent='保存修改';window.scrollTo({top:0,behavior:'smooth'})}
+function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('exportJson').onclick=()=>download('我的阅读手账备份.json',JSON.stringify({books,reflections},null,2),'application/json;charset=utf-8');
+$('exportCsv').onclick=()=>{const cols=['title','author','type','date','pages','summary','takeaway','note','rating'];const csv=[cols.join(','),...books.map(b=>cols.map(k=>'"'+String(b[k]??'').replace(/"/g,'""')+'"').join(','))].join('\r\n');download('我的阅读手账.csv','\ufeff'+csv,'text/csv;charset=utf-8')};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());const incomingBooks=Array.isArray(data)?data:data.books;const incomingRefs=Array.isArray(data)?[]:(data.reflections||[]);if(!Array.isArray(incomingBooks))throw Error();if(confirm(`将导入 ${incomingBooks.length} 本书及 ${incomingRefs.length} 条随想，并与现有记录合并。继续吗？`)){const ids=new Set(books.map(b=>b.id));const added=incomingBooks.filter(b=>b&&b.title&&!ids.has(b.id));books=[...books,...added.map(b=>({...b,id:b.id||String(Date.now()+Math.random())}))];const refIds=new Set(reflections.map(r=>r.id));reflections=[...reflections,...incomingRefs.filter(r=>r&&!refIds.has(r.id)).map(r=>({...r,id:r.id||String(Date.now()+Math.random())}))];persist();saveReflections();alert('导入完成。')}}catch(err){alert('文件格式不正确，请选择本程序导出的 JSON 备份。')}e.target.value=''};
+render();
+</script>
+</body></html>
