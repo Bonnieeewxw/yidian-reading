@@ -115,3 +115,4 @@ $('migrateBtn').onclick=async()=>{if(!currentUser||!supabase||cloudBusy)return;c
 (async()=>{drawStars();$('date').value=new Date().toISOString().slice(0,10);books=localBooks();reflections=localRefs();render();if(!isConfigured()){status('请先填写脚本顶部的 SUPABASE_URL 和 SUPABASE_PUBLISHABLE_KEY，再上传网页。当前仍显示本地记录。');$('signUpBtn').disabled=true;$('signInBtn').disabled=true;return}if(!window.supabase?.createClient){status('Supabase 客户端加载失败，请检查网络后刷新。');return}supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);supabase.auth.onAuthStateChange((_event,session)=>{setTimeout(()=>syncAuthUI(session),0)});const {data:{session},error}=await supabase.auth.getSession();if(error)status('读取登录状态失败：'+error.message);await syncAuthUI(session)})();
 </script>
 </body></html>
+<!-- Trigger GitHub Pages redeployment -->
