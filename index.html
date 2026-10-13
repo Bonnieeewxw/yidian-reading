@@ -84,7 +84,7 @@ function localBooks(){try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');re
 function localRefs(){try{const v=JSON.parse(localStorage.getItem(REF_KEY)||'[]');return Array.isArray(v)?v:[]}catch{return []}}
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(books));localStorage.setItem(REF_KEY,JSON.stringify(reflections))}catch(e){alert('浏览器本地存储不可用，请立即导出 JSON 备份。')}}
 function status(msg){$('authStatus').textContent=msg}
-function isConfigured(){return SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('PASTE_') && SUPABASE_PUBLISHABLE_KEY && !SUPABASE_PUBLISHABLE_KEY.includes('PASTE_')}
+function isConfigured(){return typeof SUPABASE_URL==='string'&&SUPABASE_URL.startsWith('https://')&&SUPABASE_URL.includes('.supabase.co')&&!SUPABASE_URL.includes('PASTE_')&&typeof SUPABASE_PUBLISHABLE_KEY==='string'&&SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_')&&!SUPABASE_PUBLISHABLE_KEY.includes('PASTE_');}
 function mapBookFromDb(b){return {id:b.id,title:b.title,author:b.author||'',type:b.book_type||'其他',date:b.read_date||'',pages:b.page_keywords||'',summary:b.summary||'',takeaway:b.memorable||'',note:'',rating:b.rating||0,updatedAt:b.updated_at||b.created_at}}
 function mapRefFromDb(r){const b=books.find(x=>x.id===r.book_id);return {id:r.id,bookId:r.book_id,bookTitle:b?.title||'',page:r.page||'',quote:r.quote||'',thought:r.reflection||'',date:(r.created_at||'').slice(0,10)}}
 function dbBook(b,userId){return {user_id:userId,title:b.title,author:b.author||'',book_type:b.type||'其他',read_date:b.date||null,summary:b.summary||'',memorable:b.takeaway||'',page_keywords:[b.pages,b.note].filter(Boolean).join(' · '),rating:(+b.rating>=1&&+b.rating<=5)?+b.rating:null,updated_at:new Date().toISOString()}}
